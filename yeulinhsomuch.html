@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn chia sẻ bằng Ngrok</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            display: inline-block;
+            color: #667eea;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .screenshot {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .screenshot img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .demo-section {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .demo-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .demo-button:hover {
+            background: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hướng dẫn chia sẻ file với Ngrok</h1>
+            <p>Người khác có thể xem file HTML của bạn từ bất kỳ đâu!</p>
+        </header>
+        
+        <div class="content">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Cài đặt Node.js và Ngrok</h3>
+                <p>Đầu tiên, bạn cần cài đặt Node.js (để sử dụng npm) và sau đó cài đặt ngrok:</p>
+                <div class="code-block">npm install -g ngrok</div>
+                <div class="note">
+                    <strong>Lưu ý:</strong> Nếu bạn chưa có Node.js, hãy tải về từ <a href="https://nodejs.org" target="_blank">nodejs.org</a>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Chạy Live Server trong VS Code</h3>
+                <p>Mở file HTML trong VS Code và chạy Live Server:</p>
+                <div class="code-block">
+                    // Click chuột phải vào file HTML<br>
+                    // Chọn "Open with Live Server"<br>
+                    // Trình duyệt sẽ mở với URL: http://127.0.0.1:5500
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Chạy Ngrok để tạo URL public</h3>
+                <p>Mở Terminal/Command Prompt và chạy lệnh:</p>
+                <div class="code-block">ngrok http 5500</div>
+                <p>Sau khi chạy, ngrok sẽ hiển thị thông tin như sau:</p>
+                <div class="code-block">
+                    ngrok by @inconshreveable<br>
+                    Session Status                online<br>
+                    Account                       Your Name (Plan: Free)<br>
+                    Version                       2.3.40<br>
+                    Region                        United States (us)<br>
+                    Web Interface                 http://127.0.0.1:4040<br>
+                    Forwarding                    http://abc-123-456.ngrok.io -> http://localhost:5500<br>
+                    Forwarding                    https://abc-123-456.ngrok.io -> http://localhost:5500
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <h3>Chia sẻ URL với người khác</h3>
+                <p>Copy URL có dạng <code>https://abc-123-456.ngrok.io</code> và gửi cho người bạn muốn chia sẻ.</p>
+                <div class="warning">
+                    <strong>Quan trọng:</strong> 
+                    <ul>
+                        <li>URL này sẽ hoạt động cho đến khi bạn tắt ngrok</li>
+                        <li>Mỗi lần chạy ngrok sẽ tạo URL mới</li>
+                        <li>Bản miễn phí có giới hạn về thời gian và số lượng kết nối</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">5</span>
+                <h3>Người khác truy cập như thế nào?</h3>
+                <p>Người nhận chỉ cần:</p>
+                <ol>
+                    <li>Mở trình duyệt web (Chrome, Firefox, Safari...)</li>
+                    <li>Dán URL bạn đã gửi vào thanh địa chỉ</li>
+                    <li>Nhấn Enter - họ sẽ thấy trang web của bạn!</li>
+                </ol>
+            </div>
+
+            <div class="demo-section">
+                <h3>Demo trực quan</h3>
+                <p>Trang web này đang chạy local. Nếu bạn chạy ngrok theo hướng dẫn trên, người khác có thể xem được trang này!</p>
+                <button class="demo-button" onclick="showDemo()">Xem Demo URL giả lập</button>
+                <div id="demoResult" style="margin-top: 15px; display: none;">
+                    <div class="code-block">https://abc-123-456-example.ngrok.io</div>
+                    <p>URL này sẽ trông tương tự như vậy khi bạn chạy ngrok!</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <h3>Mẹo hữu ích:</h3>
+                <ul>
+                    <li>Để có URL cố định, đăng ký tài khoản ngrok miễn phí và chạy: <code>ngrok authtoken YOUR_TOKEN</code></li>
+                    <li>Bạn có thể xem thống kê truy cập tại: <code>http://127.0.0.1:4040</code></li>
+                    <li>Ngrok cũng hỗ trợ HTTPS tự động</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 - Hướng dẫn chia sẻ file với Ngrok | Mọi người đều có thể xem project của bạn!</p>
+        </footer>
+    </div>
+
+    <script>
+        function showDemo() {
+            document.getElementById('demoResult').style.display = 'block';
+        }
+
+        // Hiệu ứng cho các bước
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.opacity = '1';
+                    step.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Thêm style cho animation
+        const style = document.createElement('style');
+        style.textContent = `
+            .step {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
